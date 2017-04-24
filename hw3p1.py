@@ -119,7 +119,7 @@ for layer in base_model.layers:
 callbacks = [ModelCheckpoint('Bird_Model_1-{epoch:02d}-{val_acc:.4f}.hdfs'),CSVLogger('Bird_Model_1-history', separator=',', append=False)]
 
 # compile the model (should be done *after* setting layers to non-trainable)
-model.compile(optimizer='rmsprop', loss='categorical_crossentropy')
+model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 datagen = ImageDataGenerator()
 
