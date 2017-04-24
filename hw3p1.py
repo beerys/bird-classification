@@ -116,7 +116,7 @@ for layer in base_model.layers:
 #tbCallBack = TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=False)
 
 #create callbacks
-callbacks = [ModelCheckpoint('Bird_Model_1-{epoch:02d}-{val_acc:.4f}.hdfs'),CSVLogger('Bird_Model_1-history', seperator=',', append=False)]
+callbacks = [ModelCheckpoint('Bird_Model_1-{epoch:02d}-{val_acc:.4f}.hdfs'),CSVLogger('Bird_Model_1-history', separator=',', append=False)]
 
 # compile the model (should be done *after* setting layers to non-trainable)
 model.compile(optimizer='rmsprop', loss='categorical_crossentropy', callbacks=[tbCallBack])
