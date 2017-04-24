@@ -6,6 +6,8 @@
 
 import numpy as np
 #import confusion_mat as cm
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import keras
@@ -16,8 +18,8 @@ from keras.layers import GlobalAveragePooling2D
 from keras import backend as K
 from keras.models import load_model
 from sklearn.metrics import confusion_matrix
-from keras.callbacks import ModelCheckpoint
-from keras.callbacks import TensorBoard
+from keras.callbacks import ModelCheckpoint, CSVLogger
+#from keras.callbacks import TensorBoard
 #from keras.applications.inception_v3 import InceptionV3
 from keras.applications.resnet50 import ResNet50
 from keras.preprocessing.image import ImageDataGenerator
@@ -64,7 +66,7 @@ create_train_test_dirs = True
 layers_to_train = 1
 img_rows = 150
 img_cols = 150
-epochs = 12
+epochs = 20
 
 if train_all_classes:
     num_ims = 11788
@@ -111,8 +113,10 @@ for layer in base_model.layers:
 
 #create Tensorboard Logs
 #remember to pass this to your model while fitting!! model.fit(...inputs and parameters..., callbacks=[tbCallBack])
-tbCallBack = TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=False)
+#tbCallBack = TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=False)
 
+#create callbacks
+callbacks = [ModelCheckpoint('Bird_Model_1-{epoch:02d}-{val_acc:.4f}.hdfs'),CSVLogger('Bird_Model_1-history', seperator=',', append=False)]
 
 # compile the model (should be done *after* setting layers to non-trainable)
 model.compile(optimizer='rmsprop', loss='categorical_crossentropy', callbacks=[tbCallBack])
@@ -120,10 +124,10 @@ model.compile(optimizer='rmsprop', loss='categorical_crossentropy', callbacks=[t
 datagen = ImageDataGenerator()
 
 #fit the model (should I specify classes?  How do I split the training and test data)
-model.fit_generator(datagen.flow_from_directory(directory=train_folder, target_size=(256,256),classes=classes),
+history = model.fit_generator(datagen.flow_from_directory(directory=train_folder, target_size=(256,256),classes=classes),
                     epochs=epochs,
-                    steps_per_epoch=len(x_train_names), 
-                    callbacks=[tbCallBack])
+                    steps_per_epoch=len(x_train_names)) 
+                    #callbacks=[tbCallBack])
 
 model.save(filepath)
 
@@ -134,4 +138,12 @@ print('Test accuracy:', score[1])
 score = model.evaluate(x_train, y_train, verbose=0)
 print('Training loss:', score[0])
 print('Training accuracy:', score[1])
+
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.xlabel('epochs')
+plt.ylabel('accuracy')
+plt.legend(['train','test'], loc = 'upper left')
+plt.save_fig('Bird_Model_1_accuracy.png', bbox_inches='tight')
+
 
