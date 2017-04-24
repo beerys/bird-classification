@@ -64,7 +64,7 @@ create_train_test_dirs = True
 layers_to_train = 1
 img_rows = 150
 img_cols = 150
-epochs = 2
+epochs = 12
 
 if train_all_classes:
     num_ims = 11788
