@@ -12,9 +12,7 @@ import matplotlib.pyplot as plt
 
 import keras
 from keras.models import Model
-from keras.layers import Dense
-from keras.layers import Input
-from keras.layers import GlobalAveragePooling2D
+from keras.layers import Dense, Input, GlobalAveragePooling2D
 from keras import backend as K
 from keras.models import load_model
 from sklearn.metrics import confusion_matrix
@@ -23,6 +21,7 @@ from keras.callbacks import ModelCheckpoint, CSVLogger
 #from keras.applications.inception_v3 import InceptionV3
 from keras.applications.resnet50 import ResNet50
 from keras.preprocessing.image import ImageDataGenerator
+import pickle
 
 
 def get_data_info(num_ims):
@@ -57,8 +56,6 @@ def get_data_info(num_ims):
     y_test = np.asarray(y_test)
 
     return x_train, x_test, y_train, y_test, classes
-
-
 
 batch_size = 32
 train_all_classes = False
@@ -125,6 +122,7 @@ datagen = ImageDataGenerator()
 
 #fit the model (should I specify classes?  How do I split the training and test data)
 history = model.fit_generator(datagen.flow_from_directory(directory=train_folder, target_size=(256,256),classes=classes),
+					validation_data=datagen.flow_from_directory(directory=test_folder, target_size=(256,256),classes=classes)
                     epochs=epochs,
                     steps_per_epoch=len(x_train_names),
                     callbacks=callbacks)
