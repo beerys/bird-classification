@@ -58,12 +58,12 @@ def get_data_info(num_ims):
     return x_train, x_test, y_train, y_test, classes
 
 batch_size = 32
-train_all_classes = False
+train_all_classes = True
 create_train_test_dirs = True
 layers_to_train = 1
 img_rows = 150
 img_cols = 150
-epochs = 2
+epochs = 10
 
 if train_all_classes:
     num_ims = 11788
@@ -124,9 +124,9 @@ datagen = ImageDataGenerator()
 #fit the model (should I specify classes?  How do I split the training and test data)
 history = model.fit_generator(datagen.flow_from_directory(directory=train_folder, target_size=(256,256),classes=classes),
 					validation_data=datagen.flow_from_directory(directory=test_folder, target_size=(256,256),classes=classes),
-					validation_steps=5,#len(x_test_names)/batch_size,
+					validation_steps=len(x_test_names)/batch_size,
                     epochs=epochs,
-                    steps_per_epoch=5,#len(x_train_names),
+                    steps_per_epoch=len(x_train_names),
                     callbacks=callbacks,
                     verbose=1)
 
