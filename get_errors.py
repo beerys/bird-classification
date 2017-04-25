@@ -134,7 +134,7 @@ fixedFiles = [test_generator.filenames[i] for i in fixed]
 #num_fixed = max(len(fixedFiles),5)
 plt.figure()
 count = 0
-plotnum = 0
+plotnum = 1
 for im in fixedFiles:
     if count < 5:
         plt.subplot(5,2,plotnum)
