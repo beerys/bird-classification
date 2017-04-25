@@ -72,7 +72,7 @@ else:
 image_folder = 'CUB_200_2011/CUB_200_2011/images'
 test_folder = 'Test'
 train_folder = 'Train'
-filepath = "Bird_Model_2.h5"
+filepath = "Bird_Model_1.h5"
 
 x_train_names, x_test_names, y_train, y_test, classes = get_data_info(num_ims)
 
@@ -103,7 +103,7 @@ for i in range(len(x_test_names)):
 cnf_matrix = confusion_matrix(y_class, y_pred)
 
 plt.figure()
-plt.imshow(cnf_matrix, interpolation='nearest', cmap=plt.cm.Blues)
+plt.imshow(cnf_matrix, interpolation='nearest',cmap='gray')
 plt.title('Confusion matrix')
 plt.colorbar()
 plt.tight_layout()
