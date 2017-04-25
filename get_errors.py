@@ -139,11 +139,11 @@ plotnum = 1
 for im in fixedFiles:
     if count < 5:
         plt.subplot(5,2,plotnum)
-        img = Image.open(image_folder + im)
+        img = Image.open(image_folder +'/'+ im)
         plt.imshow(img)
         plotnum += 1
         plt.subplot(5,2,plotnum)
-        img = Image.open(test_folder + im)
+        img = Image.open(test_folder +'/'+ im)
         plt.imshow(img)
         plotnum += 1
         count +=1
