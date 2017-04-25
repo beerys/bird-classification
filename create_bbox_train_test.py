@@ -30,7 +30,7 @@ for i in range(len(train_test_split)):
     #open and crop images
     #img = image.imread(source_img_dir + image_paths[i][1])
     img = Image.open(source_img_dir + image_paths[i][1])
-    box = (float(bboxes[i][1]), float(bboxes[i][2]), float(bboxes[i][3])+float(bboxes[i][1]), float(bboxes[i][4])+float(bboxes[i][2]))
+    box = (int(float(bboxes[i][1])), int(float(bboxes[i][2])), int(float(bboxes[i][3])+float(bboxes[i][1])), int(float(bboxes[i][4])+float(bboxes[i][2])))
     img_cropped = img.crop(box)
     img_cropped.save(new_dir + image_paths[i][1])
     #copyfile(img_cropped, new_dir + image_paths[i][1])
