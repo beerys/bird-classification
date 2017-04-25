@@ -145,6 +145,6 @@ plt.plot(history.history['val_acc'])
 plt.xlabel('epochs')
 plt.ylabel('accuracy')
 plt.legend(['train','test'], loc = 'upper left')
-plt.save_fig('Bird_Model_1_accuracy.png', bbox_inches='tight')
+plt.savefig('Bird_Model_1_accuracy.png', bbox_inches='tight')
 
 
