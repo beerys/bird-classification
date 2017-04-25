@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import keras
 # from keras.datasets import mnist
 # from keras.models import Sequential
-# from keras.models import Model
+from keras.models import Model
 # from keras.layers import Dense, Dropout, Flatten
 # from keras.layers import Conv2D, MaxPooling2D
 # from keras import backend as K
@@ -87,11 +87,20 @@ test_generator = datagen.flow_from_directory(directory=test_folder,
 
 count = 0
 y_pred = []
-while count < len(x_test_names):
-    count += 1
-    (x,y) = test_generator.next()
-    y_pred.append(model.predict_classes(x, batch_size=1, verbose=0))
-cnf_matrix = confusion_matrix(y_test, y_pred)
+# while count < len(x_test_names):
+#     count += 1
+#     (x,y) = test_generator.next()
+#     y_pred.append(model.predict_classes(x, batch_size=1, verbose=1))
+
+pred = model.predict_generator(test_generator, len(x_test_names), verbose=1)
+y_pred = []
+y_class = []
+for i in range(len(x_test_names)):
+    y_pred += [np.argmax(pred[i])]
+    y_class += [int(test_generator.filenames[i][:3])-1]
+
+
+cnf_matrix = confusion_matrix(y_class, y_pred)
 
 plt.figure()
 plt.imshow(cnf_matrix, interpolation='nearest', cmap=plt.cm.Blues)
