@@ -132,13 +132,13 @@ history = model.fit_generator(datagen.flow_from_directory(directory=train_folder
 
 model.save(filepath)
 
-score = model.evaluate(x_test, y_test, verbose=0)
+# score = model.evaluate(x_test, y_test, verbose=0)
 
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
-score = model.evaluate(x_train, y_train, verbose=0)
-print('Training loss:', score[0])
-print('Training accuracy:', score[1])
+# print('Test loss:', score[0])
+# print('Test accuracy:', score[1])
+# score = model.evaluate(x_train, y_train, verbose=0)
+# print('Training loss:', score[0])
+# print('Training accuracy:', score[1])
 
 plt.plot(history.history['acc'])
 plt.plot(history.history['val_acc'])
