@@ -74,7 +74,8 @@ else:
 image_folder = 'CUB_200_2011/CUB_200_2011/images'
 test_folder = 'Test'
 train_folder = 'Train'
-filepath = "Bird_Model_2.h5"
+filename = 'Bird_Model_2'
+filepath = filename + '.h5'
 
 x_train_names, x_test_names, y_train, y_test, classes = get_data_info(num_ims)
 
@@ -111,4 +112,4 @@ plt.colorbar()
 plt.tight_layout()
 plt.ylabel('True label')
 plt.xlabel('Predicted label')
-plt.savefig(filepath + '_confmat.png', bbox_inches='tight')
+plt.savefig(filename + '_confmat.png', bbox_inches='tight')
