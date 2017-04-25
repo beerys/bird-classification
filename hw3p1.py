@@ -126,7 +126,7 @@ history = model.fit_generator(datagen.flow_from_directory(directory=train_folder
 					validation_data=datagen.flow_from_directory(directory=test_folder, target_size=(256,256),classes=classes),
 					validation_steps=len(x_test_names)/batch_size,
                     epochs=epochs,
-                    steps_per_epoch=len(x_train_names),
+                    steps_per_epoch=len(x_train_names)/batch_size,
                     callbacks=callbacks,
                     verbose=1)
 
