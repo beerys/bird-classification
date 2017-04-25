@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 import keras
 from keras.models import Model
 from keras.layers import Dense, Input, GlobalAveragePooling2D
-from keras import backend as K
-from keras.models import load_model
-from sklearn.metrics import confusion_matrix
+#from keras import backend as K
+#from keras.models import load_model
+#from sklearn.metrics import confusion_matrix
 from keras.callbacks import ModelCheckpoint, CSVLogger
 #from keras.callbacks import TensorBoard
 #from keras.applications.inception_v3 import InceptionV3
