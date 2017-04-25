@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from PIL import Image
 
 import keras
 # from keras.datasets import mnist
@@ -138,10 +139,12 @@ plotnum = 1
 for im in fixedFiles:
     if count < 5:
         plt.subplot(5,2,plotnum)
-        plt.imshow(image_folder + im)
+        img = Image.open(image_folder + im)
+        plt.imshow(img)
         plotnum += 1
         plt.subplot(5,2,plotnum)
-        plt.imshow(test_folder + im)
+        img = Image.open(test_folder + im)
+        plt.imshow(img)
         plotnum += 1
         count +=1
 plt.title('Improvement examples')
