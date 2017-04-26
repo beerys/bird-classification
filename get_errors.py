@@ -60,7 +60,7 @@ y_pred = []
 pred = model.predict_generator(test_generator, len(x_test_names), verbose=1)
 y_pred = []
 y_class = []
-for i in range(len(x_test_names)):
+for i in range(len(test_generator.filenames)):
     y_pred += [np.argmax(pred[i])]
     y_class += [int(test_generator.filenames[i][:3])-1]
 
@@ -81,7 +81,7 @@ y_pred = []
 pred = model.predict_generator(test_generator, len(x_test_names), verbose=1)
 y_pred = []
 y_class = []
-for i in range(len(x_test_names)):
+for i in range(len(test_generator.filenames)):
     y_pred += [np.argmax(pred[i])]
     y_class += [int(test_generator.filenames[i][:3])-1]
 
