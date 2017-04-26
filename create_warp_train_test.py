@@ -3,6 +3,7 @@
 import os
 from shutil import copyfile
 #from matplotlib import image
+import numpy as np
 from skimage import io
 from skimage.transform import SimilarityTransform, warp
 
@@ -53,7 +54,7 @@ for i in range(len(train_test_split)):
     if not ignore:
         #calculate warp
         st = SimilarityTransform()
-        st.estimate(idealLocs,imPartLocs)
+        st.estimate(np.asarray(idealLocs),np.asarray(imPartLocs))
         img = io.imread(source_img_dir + image_paths[i][1])
         img_warped = warp(img, st, output_shape=(256,256))
         io.imsave(new_dir + image_paths[i][1],img_warped)
