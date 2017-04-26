@@ -23,9 +23,9 @@ part_locs = [line.rstrip().split() for line in open(source_dir + 'parts/part_loc
 #calculate part locations
 # [beak, crown, left eye, right eye, throat]
 idealLocs = [[250, 124],
+             [124, 80],
              [124, 124],
-             [124, 200],
-             [124, 80]]
+             [124, 200]]
 
 num_test = 0
 num_train = 0
