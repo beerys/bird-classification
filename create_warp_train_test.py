@@ -23,14 +23,14 @@ part_locs = [line.rstrip().split() for line in open(source_dir + 'parts/part_loc
 #calculate part locations
 # [beak, crown, left eye, right eye, throat]
 idealLocs = [[250, 124],
-             [124, 80],
+             [124, 40],
              [124, 124],
              [124, 200]]
 
 num_test = 0
 num_train = 0
 for i in range(len(train_test_split)):
-
+    print(i)
     img_dir = image_paths[i][1].split('/')[0]
     #bbox = [bboxes[i][1], bboxes[i][2], bboxes[i][3], bboxes[i][4]]
     if int(train_test_split[i][1]):
@@ -48,7 +48,7 @@ for i in range(len(train_test_split)):
     imPartLocs = []
     keep = False
     partsIwant = [2, 5, 7, 15]
-    if part_locs[start+7-1] is 0: ##head turned left
+    if part_locs[start+7-1] is not 0: ##head turned left
         partsIwant[2] = 11
     ignore = False
     for j in partsIwant:
