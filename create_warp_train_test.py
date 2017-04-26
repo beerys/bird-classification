@@ -1,4 +1,8 @@
-
+#Sara Beery
+# EE 148
+# HW3
+# 4/21/17
+# Python 2.7.13
 
 import os
 from shutil import copyfile

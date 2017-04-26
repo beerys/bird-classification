@@ -74,7 +74,7 @@ else:
 image_folder = 'CUB_200_2011/CUB_200_2011/images'
 test_folder = 'Test'
 train_folder = 'Train'
-filename = 'Bird_Model_2'
+filename = 'Bird_Model_3'
 filepath = filename + '.h5'
 
 x_train_names, x_test_names, y_train, y_test, classes = get_data_info(num_ims)
