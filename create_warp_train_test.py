@@ -30,9 +30,9 @@ idealLocs = [[250, 124],
 num_test = 0
 num_train = 0
 for i in range(len(train_test_split)):
-    print(i)
+
     img_dir = image_paths[i][1].split('/')[0]
-    #bbox = [bboxes[i][1], bboxes[i][2], bboxes[i][3], bboxes[i][4]]
+
     if int(train_test_split[i][1]):
         new_dir = 'Train_Warp/'
         num_train += 1
