@@ -10,51 +10,13 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from PIL import Image
+from get_data_info import get_data_info
 
 import keras
-# from keras.datasets import mnist
-# from keras.models import Sequential
 from keras.models import Model
-# from keras.layers import Dense, Dropout, Flatten
-# from keras.layers import Conv2D, MaxPooling2D
-# from keras import backend as K
 from keras.models import load_model
 from sklearn.metrics import confusion_matrix
 from keras.preprocessing.image import ImageDataGenerator
-#from keras.callbacks import ModelCheckpoint
-
-def get_data_info(num_ims):
-    source_dir = 'CUB_200_2011/CUB_200_2011/'
-    class_file = source_dir + 'image_class_labels.txt'
-    image_file = source_dir + 'images.txt'
-    split_file = source_dir + 'train_test_split.txt'
-    x_train = []
-    y_train = []
-    x_test = []
-    y_test = []
-    classes = []
-    f1 = open(class_file, 'r')
-    f2 = open(image_file, 'r')
-    f3 = open(split_file, 'r')
-    count = 0
-    while count < num_ims:
-        line = f3.readline().split()
-        file_name = f2.readline().split()[1]
-        class_name = file_name.split('/')[0]
-        class_num = float(f1.readline().split()[1])-1
-        if class_name not in classes:
-            classes.append(class_name)
-        if float(line[1]):
-            x_train.append(file_name)
-            y_train.append(class_num)
-        else:
-            x_test.append(file_name)
-            y_test.append(class_num)
-        count += 1
-    y_train = np.asarray(y_train)
-    y_test = np.asarray(y_test)
-
-    return x_train, x_test, y_train, y_test, classes
 
 
 batch_size = 32
@@ -73,11 +35,12 @@ else:
     num_classes = 20
 
 image_folder = 'CUB_200_2011/CUB_200_2011/images'
-test_folder = 'Test_Bbox'
-train_folder = 'Train_Bbox'
-filename1 = 'Bird_Model_1'
+image_folder1 = 'Test_Bbox'
+test_folder = 'Test_Warp'
+train_folder = 'Train_Warp'
+filename1 = 'Bird_Model_2'
 filepath1 = filename1 + '.h5'
-filename2 = 'Bird_Model_2'
+filename2 = 'Bird_Model_3'
 filepath2 = filename2 + '.h5'
 
 x_train_names, x_test_names, y_train, y_test, classes = get_data_info(num_ims)
@@ -102,8 +65,6 @@ for i in range(len(x_test_names)):
     y_class += [int(test_generator.filenames[i][:3])-1]
 
 diffs1 = [i for i in range(len(y_pred)) if y_pred[i] != y_class[i]]
-
-#files1 = [test_generator.filenames[i] for i in diffs1]
 
 model = load_model(filepath2)
 
@@ -139,13 +100,16 @@ plotnum = 1
 for im in fixedFiles:
     if count < 5:
         plt.subplot(5,2,plotnum)
-        img = Image.open(image_folder +'/'+ im)
+        img = Image.open(image_folder1 +'/'+ im)
         plt.imshow(img)
+        plt.gca().axes.get_xaxis().set_visible(False)
+        plt.gca().axes.get_yaxis().set_visible(False)
         plotnum += 1
         plt.subplot(5,2,plotnum)
         img = Image.open(test_folder +'/'+ im)
         plt.imshow(img)
+        plt.gca().axes.get_xaxis().set_visible(False)
+        plt.gca().axes.get_yaxis().set_visible(False)
         plotnum += 1
         count +=1
-plt.title('Improvement examples')
 plt.savefig('fixes.png', bbox_inches='tight')

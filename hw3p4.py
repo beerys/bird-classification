@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 import keras
 from keras.models import Model
-from keras.layers import Dense, Input, GlobalAveragePooling2D
+from keras.layers import Dense, GlobalAveragePooling2D
 #from keras import backend as K
 #from keras.models import load_model
 #from sklearn.metrics import confusion_matrix
@@ -69,7 +69,7 @@ for layer in base_model.layers:
     layer.trainable = False
 
 #create callbacks
-callbacks = [ModelCheckpoint('models/Bird_Model_1-{epoch:02d}-{val_acc:.4f}.hdf5'),CSVLogger('Bird_Model_1-history', separator=',', append=False)]
+callbacks = [ModelCheckpoint('models/'+filename+'-{epoch:02d}-{val_acc:.4f}.hdf5'),CSVLogger(filename+'-history', separator=',', append=False)]
 
 # compile the model (should be done *after* setting layers to non-trainable)
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['accuracy'])
